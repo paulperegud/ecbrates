@@ -17,5 +17,7 @@ from django.conf.urls import url
 from django.contrib import admin
 
 urlpatterns = [
+    url(r'^$', 'ecbrates.views.listrates', name="list"),
+    url(r'^update$', 'ecbrates.views.updaterates', name="update"),
     url(r'^admin/', admin.site.urls),
 ]
