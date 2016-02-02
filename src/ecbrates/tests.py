@@ -24,3 +24,11 @@ class ECBRateTestCase(TestCase):
         """objects can be found using rate"""
         ARate = ECBRate.objects.get(rate="1.01")
         self.assertEqual(datetime(2016,1,1,0,0,tzinfo=tz()), ARate.date)
+
+    def test_uniqueness(self):
+        """two datapoints for same date/rate can't be created"""
+        try:
+            ECBRate.objects.create(date=datetime(2016,1,1,0,0,tzinfo=tz()), code="USD", rate="1.01")
+            self.fail("uniqueness constraint failed")
+        except:
+            pass
