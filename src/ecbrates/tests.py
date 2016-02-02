@@ -1,6 +1,8 @@
 from django.test import TestCase
 
 from .models import ECBRate
+from .parser import fetch_and_parse
+
 from datetime import datetime
 from pytz import timezone
 
@@ -32,3 +34,7 @@ class ECBRateTestCase(TestCase):
             self.fail("uniqueness constraint failed")
         except:
             pass
+
+class ParserTestCase(TestCase):
+    def test_population(self):
+        self.assertEqual(5, len(fetch_and_parse()))
