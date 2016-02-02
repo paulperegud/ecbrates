@@ -5,8 +5,8 @@ from django.db import models
 # Create your models here.
 
 class ECBRate(models.Model):
-    # _key = models.CharField("primary key, combination of date and code",
-    #                         max_length=50, primary_key=True)
+    class Meta:
+        unique_together = (('date','code'),)
     timestamp = models.DateTimeField(auto_now_add=True, null=False)
     date = models.DateTimeField("publication date, as defined by ECB")
     code = models.CharField("target currency code", max_length=3, null=False)
@@ -14,9 +14,7 @@ class ECBRate(models.Model):
 
     @classmethod
     def create(arate, date, code, rate):
-        # key = date ++ code
-        return arate(date = date, code = code, rate = rate# , _key = key
-        )
+        return arate(date = date, code = code, rate = rate)
 
-    def __unicode__():
-        return self.code
+    def __unicode__(self):
+        return str(self.date) + self.code
