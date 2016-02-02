@@ -5,7 +5,7 @@ from django.db import models
 # Create your models here.
 
 class ECBRate(models.Model):
-    # _key = models.CharField("primary key, combination of published and code",
+    # _key = models.CharField("primary key, combination of date and code",
     #                         max_length=50, primary_key=True)
     timestamp = models.DateTimeField(auto_now_add=True, null=False)
     date = models.DateTimeField("publication date, as defined by ECB")

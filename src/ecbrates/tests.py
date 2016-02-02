@@ -6,11 +6,13 @@ from pytz import timezone
 
 # Create your tests here.
 
+def tz():
+    return timezone('Europe/Berlin')
+
 class ECBRateTestCase(TestCase):
     def setUp(self):
-        Warsaw =timezone('Europe/Warsaw')
-        ECBRate.objects.create(date=datetime(2016,1,1,0,0,tzinfo=Warsaw), code="USD", rate="1.01")
-        ECBRate.objects.create(date=datetime(2016,1,2,0,0,tzinfo=Warsaw), code="USD", rate="1.009")
+        ECBRate.objects.create(date=datetime(2016,1,1,0,0,tzinfo=tz()), code="USD", rate="1.01")
+        ECBRate.objects.create(date=datetime(2016,1,2,0,0,tzinfo=tz()), code="USD", rate="1.009")
 
     def test_rate_creation(self):
         """objects can be created and retrieved"""
@@ -19,6 +21,8 @@ class ECBRateTestCase(TestCase):
 
     def test_rate_search(self):
         """objects can be created and using key"""
-        Warsaw =timezone('Europe/Warsaw')
         ARate = ECBRate.objects.get(rate="1.01")
-        self.assertEqual(datetime(2016,1,1,0,0,tzinfo=Warsaw), ARate.date)
+        self.assertEqual(datetime(2016,1,1,0,0,tzinfo=tz()), ARate.date)
+
+    # def test_rate_pri_key(self):
+    #     """rate can be found by combination of date and code"""
