@@ -5,6 +5,8 @@ from .parser import fetch_and_parse
 
 from datetime import datetime
 from pytz import timezone
+import os
+import subprocess
 
 # Create your tests here.
 
@@ -37,4 +39,6 @@ class ECBRateTestCase(TestCase):
 
 class ParserTestCase(TestCase):
     def test_population(self):
-        self.assertEqual(5, len(fetch_and_parse()))
+        fn = os.path.join(subprocess.check_output('pwd')[:-1], 'ecbrates/priv/fxref-usd.xml')
+        R = fetch_and_parse('file://'+fn)
+        self.assertEqual(5, len(R))

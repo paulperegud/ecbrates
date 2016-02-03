@@ -4,10 +4,9 @@ from pytz import timezone
 
 from .models import ECBRate
 
-def fetch_and_parse():
-    d = feedparser.parse('https://www.ecb.europa.eu/rss/fxref-usd.html')
+def fetch_and_parse(uri):
     arr = []
-    for entry in d.entries:
+    for entry in feedparser.parse(uri).entries:
         parsed = parse_entry(entry)
         arr.append(parsed)
     return arr
