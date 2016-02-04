@@ -14,7 +14,7 @@ def fetch_and_parse(uri):
 def parse_entry(entry):
     [rate, code] = entry.cb_exchangerate.split('\n')
     date = parse_datetime(entry.updated)
-    return ECBRate.objects.create(date=date, code=code, rate=rate)
+    return ECBRate(date=date, code=code, rate=rate)
 
 def parse_datetime(dtstring):
     noTz = datetime.strptime(dtstring[:-6], '%Y-%m-%dT%H:%M:%S')
