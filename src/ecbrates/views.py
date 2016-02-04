@@ -12,6 +12,10 @@ def listrates(request):
     return render(request, "list.html", context)
 
 def updaterates(request):
-    feeds = ['https://www.ecb.europa.eu/rss/fxref-usd.html']
+    feeds = [
+        'https://www.ecb.europa.eu/rss/fxref-usd.html',
+        'https://www.ecb.europa.eu/rss/fxref-pln.html',
+        'https://www.ecb.europa.eu/rss/fxref-jpy.html',
+    ]
     background_parsing(feeds)
     return render(request, "loading.html", {})

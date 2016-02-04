@@ -15,9 +15,9 @@ def tz():
 
 class ECBRateTestCase(TestCase):
     def setUp(self):
-        ECBRate.objects.create(date=datetime(2016,1,1,0,0,tzinfo=tz()), code="USD", rate="1.01")
-        ECBRate.objects.create(date=datetime(2016,1,1,0,0,tzinfo=tz()), code="PLN", rate="4.30")
-        ECBRate.objects.create(date=datetime(2016,1,2,0,0,tzinfo=tz()), code="USD", rate="1.009")
+        ECBRate.objects.create(date=datetime(2016,1,1,0,0,tzinfo=tz()), target="USD", rate="1.01")
+        ECBRate.objects.create(date=datetime(2016,1,1,0,0,tzinfo=tz()), target="PLN", rate="4.30")
+        ECBRate.objects.create(date=datetime(2016,1,2,0,0,tzinfo=tz()), target="USD", rate="1.009")
 
     def test_rate_creation(self):
         """objects can be created and retrieved"""
@@ -32,7 +32,7 @@ class ECBRateTestCase(TestCase):
     def test_uniqueness(self):
         """two datapoints for same date/rate can't be created"""
         try:
-            ECBRate.objects.create(date=datetime(2016,1,1,0,0,tzinfo=tz()), code="USD", rate="1.01")
+            ECBRate.objects.create(date=datetime(2016,1,1,0,0,tzinfo=tz()), target="USD", rate="1.01")
             self.fail("uniqueness constraint failed")
         except:
             pass

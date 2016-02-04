@@ -5,7 +5,7 @@ from django.contrib import admin
 from .models import ECBRate
 
 class ECBRateAdmin(admin.ModelAdmin):
-    list_display =["date", "code", "rate"]
+    list_display =["date", "base", "target", "rate"]
     class Meta:
         model = ECBRate
 
