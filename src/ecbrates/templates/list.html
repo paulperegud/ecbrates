@@ -4,7 +4,6 @@
 <head>
 <title>ECB rates</title>
 <link rel="stylesheet" type="text/css" href="/static/admin/css/base.css" />
-<link rel="stylesheet" type="text/css" href="/static/admin/css/login.css" />
 </head>
 <body>
   <div id="header">
@@ -12,6 +11,9 @@
       <h1 id="site-name">ECB rates listing</h1>
     </div>
   </div>
+  {% if emptydb %}
+  <strong>No rates to display.<a href="update">Load rates.</a></strong>
+  {% endif %}
   <table>
     {% for i in rates %}
     <tr>

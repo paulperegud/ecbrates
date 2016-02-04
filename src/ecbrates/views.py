@@ -8,6 +8,7 @@ def listrates(request):
     all = ECBRate.objects.all()
     context = {
         "rates": all,
+        "emptydb": len(all) < 1,
     }
     return render(request, "list.html", context)
 
