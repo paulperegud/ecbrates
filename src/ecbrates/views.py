@@ -1,8 +1,7 @@
 from django.shortcuts import render
 
 from .models import ECBRate
-from django.db import IntegrityError
-# Create your views here.
+from .worker import background_parsing
 
 def listrates(request):
     all = ECBRate.objects.all()
@@ -13,11 +12,6 @@ def listrates(request):
     return render(request, "list.html", context)
 
 def updaterates(request):
-    from .parser import fetch_and_parse
-    rates = fetch_and_parse('https://www.ecb.europa.eu/rss/fxref-usd.html')
-    for i in rates:
-        try:
-            i.save()
-        except IntegrityError:
-            pass
+    feeds = ['https://www.ecb.europa.eu/rss/fxref-usd.html']
+    background_parsing(feeds)
     return render(request, "loading.html", {})
