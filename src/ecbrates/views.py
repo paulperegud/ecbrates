@@ -5,7 +5,11 @@ from django.db import IntegrityError
 # Create your views here.
 
 def listrates(request):
-    return render(request, "list.html", {})
+    all = ECBRate.objects.all()
+    context = {
+        "rates": all,
+    }
+    return render(request, "list.html", context)
 
 def updaterates(request):
     from .parser import fetch_and_parse

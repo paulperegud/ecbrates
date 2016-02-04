@@ -1,1 +1,25 @@
-This is a list of ECB rates for today, last updated at...
+<!DOCTYPE html>
+
+<html lang="en-us" >
+<head>
+<title>ECB rates</title>
+<link rel="stylesheet" type="text/css" href="/static/admin/css/base.css" />
+<link rel="stylesheet" type="text/css" href="/static/admin/css/login.css" />
+</head>
+<body>
+  <div id="header">
+    <div id="branding">
+      <h1 id="site-name">ECB rates listing</h1>
+    </div>
+  </div>
+  <table>
+    {% for i in rates %}
+    <tr>
+      <td>{{ i.date }}</td>
+      <td>{{ i.code }}</td>
+      <td>{{ i.rate }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</body>
+</html>
